@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fake News Detection</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <!-- <link rel="stylesheet" href="style.css"/////home/kavir/Desktop/Fake/FakeNewsDetection/static/css//// /> -->
+    <!-- <link rel="stylesheet" href="{% static 'css/style.css' %}" /> -->
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}" />
+
+
+    
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.12.1/css/all.css"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <style>
+      .header{
+       min-height: 100vh;
+       width: 100%;
+       background-image: linear-gradient(rgba(4,9,30,0.7),rgba(4,9,30,0.7)),url("{% static 'images/bg.jpg' %}"); 
+       background-position: center;
+       background-size: cover;
+       position: relative;
+
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1;
+  display: none;
+  min-width: 100px;
+  padding: 10px 0;
+  background-color: transparent;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+/* Show dropdown content on hover */
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+/* Style arrow */
+.dropdown-content::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 20px; /* Adjust as needed */
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #f1f1f1 transparent;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: rgb(253, 253, 253);
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover::after {
+  content: '';
+  width: 100%;
+  height: 2px;
+  background: #9e2020;
+  display: block;
+  margin-top: 5px; /* Adjust as needed */
+  transition: width 0.5s ease-in-out;
+}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content { display: block; }
+
+         }
+
+        /* Centering the profile box */
+        .overlay1 {
+        text-align: center;
+        position: fixed;
+        top: 150px;
+        left: 250px;
+        width: 70%;
+        height: 50%;
+        background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+        backdrop-filter: blur(10px); /* Blur the background */
+        z-index: 1001; /* Ensure the box appears above other content */
+      }
+  
+  
+      .close1 {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    color: white; /* Change color of the close button */
+    font-size: 24px; /* Change font size of the close button */
+    background-color: rgba(0, 0, 0, 0.5); /* Background color of the close button */
+    padding: 5px 10px; /* Padding around the close button */
+    border-radius: 50%; /* Make the close button circular */
+    transition: background-color 0.3s; /* Add transition effect */
+}
+
+.close1:hover {
+    background-color: rgba(255, 255, 255, 0.5); /* Change background color on hover */
+}  
+        
+         
+     </style>
+    
+  </head>
+  <body>
+    <section class="header"  >     
+  
+      <nav>
+        <a href="{% url 'index' %}"><img src="{% static 'images/na.png' %}"></a>
+        <div class="nav-links">
+            <ul>
+                <li><a href="{% url 'forarticle' %}">ARTICLE BASED</a></li>
+                <li><a href="{% url 'forurl' %}">URL BASED</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#feature">Features</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropbtn" id="profileLink">{{ request.user.username }}</a>
+                  <div class="dropdown-content">
+                      <a href="#" id="profile"  onclick="openProfileBox()">Profile</a>
+                      <a href="{% url 'index' %}">Logout</a>
+                  </div>
+              </li>
+            </ul>
+        </div>
+      </nav>
+
+      <div id="profileBox" class="overlay1" style="display: none;">
+          <span class="close1" onclick="closeProfileBox()">&times;</span>
+          <h2 style="font-size: 24px; display: inline;color:white">Hello, {{ request.user.username }}</h2>
+          <br>
+          <p style="font-size: 24px; display: inline;">You are logged in.</p>
+
+      </div>
+
+      <div class="text-box">
+        <h1 > Fake News Detection</h1>
+        
+        <!-- <p>text text text text text</p> -->
+      </div>
+    </section>
+    <div id="loadingGif" style="display: none">
+      <img src="https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif" />
+    </div>
+    <div id="loader" class="center"></div>
+    
+  
+
+    <br>
+ <section id="about" class="main">
+        <div class="row">
+            <div class="main-col">
+                <h1 style="font-size: 30px; color: grey;">WELCOME TO </h1>
+                <h1 style="font-size: 60px; color: #9e2020;">Fake News Detection</h1>
+                <p >"Introducing Fake News Detection, your go-to source for delving into the intricacies of today's news. Utilizing cutting-edge natural language processing, our platform dissects news articles to uncover essential insights, trends. Navigate the news landscape confidently as News Analyzer equips you with the tools to make informed decisions, unraveling the complexities within headlines. Immerse yourself in news exploration, gaining a holistic perspective on the stories shaping our world. 
+                    <br><br>
+                    
+            </div> 
+            <div class="main-col">
+                <img src="{% static 'images/old-newspaper-350376_1280.jpg' %}" >
+            </div> 
+        </div>
+    
+    
+    </section>
+
+    <section id="feature" class="feature">
+    <h1>FEATURE WE OFFER</h1>
+   
+
+    <div class="row">
+        <div class="feature-col">
+            <h3>ARTICAL BASED</h3>
+            <p>Fake news detection using article-based data involves the application of machine learning and natural
+               language processing techniques to distinguish between genuine and false information within news articles. By collecting and preprocessing a diverse dataset, the text is cleaned, tokenized, and converted into numerical representations using methods like TF-IDF or word embeddings. Machine learning models, such as Support Vector Machines or deep learning models like LSTMs, are then trained on this data to learn patterns indicative of fake news. The models are evaluated on metrics like accuracy and precision, and after fine-tuning, deployed to automatically classify articles. Continuous monitoring and updates are crucial to adapt to evolving misinformation trends, making these systems effective tools in combating the spread of fake news.</p>
+
+        </div>
+        
+        <div class="feature-col">
+            <h3>URL BASED</h3>
+            <p>Fake news detection using URL-based data involves analyzing information from web pages to identify misleading or fabricated content. This process typically begins with web scraping to extract text data from the provided URL. The extracted text undergoes preprocessing steps to remove noise and irrelevant information. Feature engineering methods, such as TF-IDF or embeddings, are employed to convert the text into a suitable format for machine learning models. Support Vector Machines, decision trees, or deep learning models like LSTMs may be trained on labeled datasets containing examples of both genuine and fake news. The trained models can then classify unseen URLs as potentially fake or not based on learned patterns. Regular updates and continuous monitoring are essential to ensure the effectiveness of the detection system against
+               evolving tactics used to spread misinformation through URLs.</p>
+        </div>
+    </div> 
+</section>
+   
+     
+    
+     <script src="{% static 'js/main.js'%}"></script>
+    <script>
+      document.onreadystatechange = function () {
+        if (document.readyState !== "complete") {
+          document.querySelector("body").style.visibility = "hidden";
+          document.querySelector("#loader").style.visibility = "visible";
+        } else {
+          document.querySelector("#loader").style.display = "none";
+          document.querySelector("body").style.visibility = "visible";
+        }
+      };
+
+      function openProfileBox() {
+      document.getElementById("profileBox").style.display = "block";
+    }
+
+    function closeProfileBox() {
+      document.getElementById("profileBox").style.display = "none";
+    }
+
+      
+    </script> 
+  </body>
+</html>

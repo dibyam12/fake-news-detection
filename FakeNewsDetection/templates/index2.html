@@ -1,0 +1,37 @@
+-{% extends 'forUrl.html' %} {% block content %} {% if values == 'REAL' %}
+<h4 class="below_textarea" style="color: #ffff; margin: 10px 0">
+  "The News is <span style="color: green">{{values}} </span>"<br />
+  Based on the features (more frequent keyword)
+  <br /><span style="color: white"> Scraped Data:</span>
+  <div
+    style="
+      background-color: white;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+        rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+        rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      width: 700px;
+      margin: 0px auto;
+      height: 600px;
+      overflow-y: scroll;
+      color: black;
+      text-align: left;
+      padding: 15;
+      font-size: 20px !important;
+      font-weight: 300;
+      border-radius: 20px;
+    "
+  >
+    {{words}}
+  </div>
+</h4>
+<!-- {% elif values == 'Blank' %}
+<h4 class="below_textarea">
+  "The News is <span style="color: rgb(62, 0, 128)">{{values}}</span>"
+</h4> -->
+{% else %}
+<h4 class="below_textarea" style="color: #ffff">
+  "The News is <span style="color: red">{{values}}</span>"<br />
+  Based on the features (more frequent keyword,metadata)
+</h4>
+{% endif %}
+{% endblock content %} 
